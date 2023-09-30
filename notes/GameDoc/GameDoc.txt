@@ -1,0 +1,41 @@
+Theme : Limited Space
+
+Sheep herding using birds
+
+Limited space:
+	the ship that takes the sheep only has 10 spaces
+	the map gets smaller overtime, sweep from left  to right
+	the sheep can only carry 1 item (bag)
+	
+the map is randomly generated, with a few sheep some food spots and items,
+	later on some obstacles like enemies.
+the player has to guide the sheep to the ship on the right side of the map, the
+	sheep need to feed (rest) collect the items and avoid obstacles.
+	after every map you get points to upgrade your birds
+	
+	
+	
+	
+2 kind of birds, slower more obidient, faster flying in a sin wave fashion
+upgrade birds:
+	move_speed
+	angle_speed
+	life_time
+	spawn_cd
+	spawn_number
+	
+different types of sheep
+	normal
+	fast sheep
+	big sheep - can carry 2 items has double stats, slower
+	
+obstacles
+	Scarecrow - birds avoid it, later maps it can also move
+	blob monster - eats sheep
+	
+mechanics
+	sheep flock together (to their nearest sheep) avoid the birds and map edges
+		when under treshold they will feed
+	sheep carry over from map to map and enter from the left
+	the wall advances from the left after 1 minute it moves closer every 10 seconds
+	birds fly towards the mouse, avoid scarecrows and leave the map after some time
