@@ -32,6 +32,7 @@ different types of sheep
 obstacles
 	Scarecrow - birds avoid it, later maps it can also move
 	blob monster - eats sheep
+	slow sand/
 	
 mechanics
 	sheep flock together (to their nearest sheep) avoid the birds and map edges
@@ -39,3 +40,6 @@ mechanics
 	sheep carry over from map to map and enter from the left
 	the wall advances from the left after 1 minute it moves closer every 10 seconds
 	birds fly towards the mouse, avoid scarecrows and leave the map after some time
+	
+art style:
+	shades of green
