@@ -3,6 +3,15 @@
 
 if(not safe)
 {
+	if(x < abs(sprite_width/2))
+		x = abs(sprite_width/2)
+	if(x > room_width-sprite_width/2)
+		x = room_width-sprite_width/2
+	if(y < sprite_height/2)
+		y = sprite_height/2
+	if(y > room_height-sprite_height/2)
+		y = room_height-sprite_height/2
+		
 	if(x < obj_control.close_in_anim*room_width)
 		instance_destroy();
 		
@@ -18,7 +27,7 @@ if(not safe)
 			else
 				eating = false;
 		}
-		else if (not eating and food < max_food*0.9)
+		else if (not eating and food < max_food*0.8)
 		{
 			eating = true;
 			speed = 0;
@@ -98,8 +107,9 @@ if(not safe)
 		{
 			safe = true;
 			array_push(_ship.sheep_list,id);
-			x = _ship.bbox_left+sprite_width/2+_sheep_list_length mod 2 * 16;
-			y = _ship.bbox_top+sprite_height/2+_sheep_list_length div 2 * 16;
+			_sheep_list_length += _sheep_list_length;
+			x = _ship.bbox_left+sprite_width/2+ _sheep_list_length mod 2 * 16;
+			y = _ship.bbox_top+sprite_height/2+ _sheep_list_length div 2 * 16;
 			speed = 0;
 			if(carry)
 			{

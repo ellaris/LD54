@@ -42,3 +42,8 @@ function Vector2(_x = 0,_y = 0) constructor
 		return( point_direction(0, 0, _x, _y));
 	}
 }
+
+function go_to_game_room()
+{
+	room_goto(rm_game);	
+}

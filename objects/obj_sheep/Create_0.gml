@@ -19,9 +19,9 @@ max_sleep = room_speed*60;
 sleep = irandom(max_sleep);
 
 map_sight_distance = 32;
-bird_sight_distance = 128;
+bird_sight_distance = 96;
 sheep_cozy_distance = 44;
-pasture_sight_distance = 44;
+pasture_sight_distance = 128;
 
 turn_from_map_edge = function()
 {
@@ -59,13 +59,16 @@ turn_to_sheep = function()
 {
 	var _v = new Vector2();
 	var _nearest = instance_nearest_notself(obj_sheep);
-	if(_nearest.dist > sheep_cozy_distance)
+	if(_nearest)
 	{
-		_v.add(new Vector2(_nearest.id.x-x,_nearest.id.y-y));
-	}
-	else if (_nearest.dist <= sprite_width)
-	{
-		_v.add(new Vector2(x-_nearest.id.x,y-_nearest.id.y));	
+		if(_nearest.dist > sheep_cozy_distance)
+		{
+			_v.add(new Vector2(_nearest.id.x-x,_nearest.id.y-y));
+		}
+		else if (_nearest.dist <= sprite_width)
+		{
+			_v.add(new Vector2(x-_nearest.id.x,y-_nearest.id.y));	
+		}
 	}
 	return(_v);
 }
