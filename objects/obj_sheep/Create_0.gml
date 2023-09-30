@@ -4,19 +4,24 @@
 move_speed = 1;
 safe = false;
 carry = noone;
+carry_capacity = 1;
+eating = false;
 
 wander = 0;
 max_wander = room_speed*2;
+wander_speed = 0;
 
-max_food = 100;
-food = max_food;
+max_food = room_speed*60;
+food = irandom(max_food);
+hunger_ratio = 0.3;
 
-max_sleep = 100;
-sleep = max_sleep;
+max_sleep = room_speed*60;
+sleep = irandom(max_sleep);
 
-map_sight_distance = 64;
+map_sight_distance = 32;
 bird_sight_distance = 128;
-sheep_cozy_distance = 32;
+sheep_cozy_distance = 44;
+pasture_sight_distance = 44;
 
 turn_from_map_edge = function()
 {
@@ -62,5 +67,21 @@ turn_to_sheep = function()
 	{
 		_v.add(new Vector2(x-_nearest.id.x,y-_nearest.id.y));	
 	}
+	return(_v);
+}
+
+turn_to_pasture = function()
+{
+	var _v = new Vector2();
+	//move away from the birds
+	with(obj_pasture)
+	{
+		var _dist = point_distance(x,y,other.x,other.y)
+		if(_dist <= other.pasture_sight_distance)
+		{
+			_v.add(new Vector2(x-other.x,y-other.y));
+		}
+	}
+	
 	return(_v);
 }
