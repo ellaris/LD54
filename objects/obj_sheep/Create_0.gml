@@ -18,9 +18,9 @@ hunger_ratio = 0.3;
 max_sleep = room_speed*60;
 sleep = irandom(max_sleep);
 
-map_sight_distance = 32;
+map_sight_distance = 48;
 bird_sight_distance = 96;
-sheep_cozy_distance = 44;
+sheep_cozy_distance = 48;
 pasture_sight_distance = 128;
 
 turn_from_map_edge = function()

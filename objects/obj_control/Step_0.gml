@@ -7,7 +7,8 @@ if(room == rm_game)
 		repeat spawn_number
 		{
 			var _side = irandom(1);
-			var _bird = instance_create_layer(_side*room_width*irandom(1)+(1-_side)*irandom(room_width),(1-_side)*room_height*irandom(1)+_side*irandom(room_height),layer,obj_bird);
+			var _bird_type = choose(obj_bird_obidient, obj_bird_wild);
+			var _bird = instance_create_layer(_side*room_width*irandom(1)+(1-_side)*irandom(room_width),(1-_side)*room_height*irandom(1)+_side*irandom(room_height),layer,_bird_type);
 			_bird.max_speed *= bird_speed;
 			_bird.damage *= bird_damage;
 			_bird.max_turn *= bird_turn;
@@ -27,8 +28,15 @@ if(room == rm_game)
 		close_in_distance += 0.1;
 	}
 
-	if(close_in_anim < close_in_distance and close_in_distance < 0.9)
+	if(close_in_anim < close_in_distance and close_in_distance <= 0.9)
 	{
 		close_in_anim = lerp(close_in_anim,close_in_distance,(0.2-(close_in_distance-close_in_anim))/4);	
 	}
+	
+	
+	level_complete = true;
+	with(obj_sheep)
+		if(not safe)
+			other.level_complete = false;
+
 }

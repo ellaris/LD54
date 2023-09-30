@@ -3,6 +3,7 @@
 if(room == rm_game)
 {
 	close_in_timer = room_speed*90;
+	generate_map();
 }
 
 spawn_cd = 0;
