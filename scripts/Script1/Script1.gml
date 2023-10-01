@@ -48,13 +48,13 @@ function go_to_game_room()
 	room_goto(rm_game);	
 }
 
-function draw_shadow()
+function draw_shadow(_yoffset = 0)
 {
-	var _xo = sprite_width/10;
-	var _height = sprite_height/10;
+	var _xo = sprite_width/8;
+	var _height = sprite_height/8;
 	draw_set_color(c_green);
-	draw_set_alpha(0.4);
-	draw_ellipse(bbox_left-_xo,bbox_bottom-_height/2,bbox_right-_xo,bbox_bottom+_height/2,false);
+	draw_set_alpha(0.3);
+	draw_ellipse(bbox_left-_xo,bbox_bottom-_height+_yoffset,bbox_right-_xo,bbox_bottom+_height+_yoffset,false);
 	draw_set_alpha(1);
 	draw_set_color(c_white);
 }

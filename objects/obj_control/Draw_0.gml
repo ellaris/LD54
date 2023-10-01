@@ -27,7 +27,9 @@ if(room == rm_game)
 			speed = speed*1.02;
 			if(speed == 0)
 				speed = 0.05;
-		
+			if(y+sprite_height < 0)
+				speed = 0;
+				
 			for(var i = 0; i < array_length(sheep_list); i++)
 			{
 				var _sheep = sheep_list[i];

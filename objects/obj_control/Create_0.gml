@@ -4,6 +4,15 @@
 draw_set_halign(fa_middle);
 draw_set_valign(fa_center);
 
+particle_movement_system = part_system_create(part_movement);
+particle_movement_type = particle_get_info(part_movement).emitters[0].parttype.ind;
+
+particle_spawn_system = part_system_create(part_spawn);
+particle_spawn_type = particle_get_info(part_spawn).emitters[0].parttype.ind;
+
+particle_sd_system = part_system_create(part_sd);
+part_system_automatic_update(particle_sd_system,false);
+
 spawn_cd = 0;
 max_spawn_cd = room_speed*5;
 
@@ -12,8 +21,8 @@ close_in_period = room_speed*3;
 close_in_distance = 0;
 close_in_anim = 0;
 
-level = 1;
-power_points = 0;
+level = 8;
+power_points = 10;
 
 enemy_spawn_cd_max = room_speed*10*5;
 enemy_spawn_cd = enemy_spawn_cd_max;

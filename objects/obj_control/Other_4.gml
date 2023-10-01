@@ -7,12 +7,13 @@ if(room == rm_game)
 	{
 		var _sheep = instance_find(obj_sheep, i);
 		_sheep.y = room_height/2;
-		_sheep.x = -16-20*i
+		_sheep.x = -16-24*i
 		_sheep.move_in = -_sheep.x;
 		_sheep.persistent = false;
 		_sheep.visible = true;
 	}
 	generate_map();
+	enemy_spawn_cd = enemy_spawn_cd_max;
 }
 
 spawn_cd = 0;

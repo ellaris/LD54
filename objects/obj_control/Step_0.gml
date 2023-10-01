@@ -33,6 +33,9 @@ if(room == rm_game)
 
 	if(spawn_cd > 0)
 		spawn_cd -= spawn_cd_reduction;
+		
+	if(spawn_cd > 0 and spawn_cd <= spawn_cd_reduction)
+		audio_play_sound(snd_ready,2,false);
 	
 	if(close_in_timer > 0)
 		close_in_timer -= 1;
@@ -40,7 +43,16 @@ if(room == rm_game)
 	{
 		close_in_timer = close_in_period;
 		close_in_distance += 0.1;
+		audio_play_sound(snd_close_in_move,2,false);
 	}
+	
+	if(close_in_timer <= room_speed*1.5)
+	{
+		part_system_automatic_update(particle_sd_system,true);
+		part_system_position(particle_sd_system,room_width*close_in_anim,0);
+	}
+	else
+		part_system_automatic_update(particle_sd_system,false);
 
 	if(close_in_anim < close_in_distance and close_in_distance <= 0.9)
 	{

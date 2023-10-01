@@ -13,6 +13,11 @@ scarecrow_sight_distance = 64;
 
 direction = point_direction(x,y,mouse_x,mouse_y);
 
+part_particles_create(obj_control.particle_spawn_system,x,y,obj_control.particle_spawn_type,10);
+
+if(not audio_is_playing(snd_spawn_bird))
+	audio_play_sound(snd_spawn_bird,2,false);
+
 follow_mouse = function()
 {
 	var _scarecrow = turn_from_scarecrow();

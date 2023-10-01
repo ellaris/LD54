@@ -11,3 +11,8 @@ if(life >= max_life)
 
 if(boost_speed)
 	boost_speed -= 1;
+	
+if((life mod round(20/speed)) == 1)
+{
+		part_particles_create(obj_control.particle_movement_system,x,bbox_bottom,obj_control.particle_movement_type,3);	
+}

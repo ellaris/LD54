@@ -1,5 +1,7 @@
 /// @description Wstaw opis w tym miejscu
 // W tym edytorze możesz zapisać swój kod
+if(room == rm_start)
+	exit;
 if(move_in != 0)
 {
 	var _change = clamp(move_in,-move_speed,move_speed);
@@ -23,7 +25,7 @@ if(not safe)
 	if(x < obj_control.close_in_anim*room_width)
 		instance_destroy();
 		
-	if(place_meeting(x,y,obj_pasture))
+	if(position_meeting(x,y,obj_pasture))
 	{
 		if(eating)
 		{
@@ -31,6 +33,8 @@ if(not safe)
 			{
 				speed = 0;
 				food += 1+max_food/room_speed/(10/move_speed);
+				if(not audio_is_playing(snd_sheep_eat))
+					audio_play_sound(snd_sheep_eat,2,false);
 			}
 			else
 				eating = false;
@@ -50,6 +54,7 @@ if(not safe)
 		{
 			carry = _item
 			_item.carried = true;
+			audio_play_sound(snd_pickup,2,false);
 		}
 	} 
 	else
@@ -114,6 +119,7 @@ if(not safe)
 		if(_sheep_list_length  < 6 )
 		{
 			safe = true;
+			audio_play_sound(snd_sheep_safe,2,false);
 			array_push(_ship.sheep_list,id);
 			//_sheep_list_length += 1;
 			image_xscale = 1;
@@ -127,18 +133,30 @@ if(not safe)
 }
 
 if(carry)
-			{
-				carry.x = bbox_left;
-				carry.y = bbox_top;
-			}
+{
+	carry.x = bbox_left;
+	carry.y = bbox_top;
+}
 
 if(speed != 0)
 {
 	image_speed = speed;
+	if(food mod round(15/speed) == 1)
+	{
+		part_particles_create(obj_control.particle_movement_system,x,bbox_bottom,obj_control.particle_movement_type,3);	
+
+	}
 }
+else
 if(eating)
 {
 	image_speed = move_speed;
+	
+	if(current_time mod room_speed/5 == 0)
+	{
+		part_particles_create(obj_control.particle_movement_system,x,bbox_bottom,obj_control.particle_movement_type,3);	
+
+	}
 }
 else
 {
