@@ -1,6 +1,9 @@
 /// @description Wstaw opis w tym miejscu
 // W tym edytorze możesz zapisać swój kod
 
+draw_set_halign(fa_middle);
+draw_set_valign(fa_center);
+
 spawn_cd = 0;
 max_spawn_cd = room_speed*5;
 
@@ -10,8 +13,10 @@ close_in_distance = 0;
 close_in_anim = 0;
 
 level = 1;
-power_points = 5;
+power_points = 0;
 
+enemy_spawn_cd_max = room_speed*10*5;
+enemy_spawn_cd = enemy_spawn_cd_max;
 
 initial_spawn_cd_reduction = 1; // 10%
 initial_bird_damage = 1; // 10%
@@ -51,7 +56,7 @@ generate_map = function()
 	else
 	{
 		_spawn_sheep = min(level div 3,10);
-		_spawn_pasture = max(1,3 - level div 5);
+		_spawn_pasture = max(1,5 - level div 7);
 		_spawn_item = max(_spawn_sheep/2, 1.1*level - power(1/6 *level,2));
 		_spawn_scarecrow = min(4, level div 6);
 	}
@@ -60,14 +65,18 @@ generate_map = function()
 	
 	var _occupied = 0;
 	spawn_object(_spawn_sheep, obj_sheep, _occupied);
-	spawn_object(_spawn_pasture, obj_pasture, _occupied);
+	spawn_object(_spawn_pasture, obj_pasture, _occupied, layer_get_id("back"));
 	spawn_object(_spawn_item, obj_item, _occupied);
-	spawn_object(_spawn_scarecrow, obj_scarecrow, _occupied);
+	spawn_object(_spawn_scarecrow, obj_scarecrow, _occupied, layer_get_id("back"));
 	
 	if(level == 1)
 	{
 		with(obj_sheep)
+		{
 			food = max_food;
+			x = room_width/2;
+			y = room_height/2;
+		}
 	}
 	else if (level == 2)
 	{
@@ -76,28 +85,28 @@ generate_map = function()
 	}
 	else if (level == 3)
 	{
-		_spawn_item = 1;
+		
 	}
 	
 	
 }
 
-spawn_object = function(_num, _obj, _occupied_array)
+spawn_object = function(_num, _obj, _occupied_array, _layer = layer)
 {
 	var _row_length = 32;
 	var _x_gen = room_width*0.8;
 	var _rows = _x_gen/_row_length;
-	var _cols = room_height/_row_length;
+	var _cols = room_height/_row_length-1;
 	if(not is_array(_occupied_array))
-		_occupied_array = array_create(_rows*_cols+_rows);
+		_occupied_array = array_create(_rows*_cols+_rows+1);
 	
 	for(var i = 0; i < _num; i++)
 	{
 		var _coord = irandom(_rows*_cols+_rows);
 		while(_occupied_array[_coord] != 0)
-			_coord = irandom(_x_gen*_cols+_x_gen);
+			_coord = irandom(_rows*_cols+_rows);
 		var _instance = instance_create_layer(_row_length/2+(_coord mod _rows) * _row_length, 
-			_row_length/2+(_coord div _rows) * _row_length, layer, _obj);
+			_row_length/2+(_coord div _rows) * _row_length, _layer, _obj);
 		_occupied_array[_coord] = _instance;
 	}
 }

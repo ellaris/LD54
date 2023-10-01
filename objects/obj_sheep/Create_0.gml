@@ -10,6 +10,7 @@ eating = false;
 wander = 0;
 max_wander = room_speed*2;
 wander_speed = 0;
+move_in = 0;
 
 max_food = room_speed*60;
 food = irandom(max_food);
@@ -59,7 +60,7 @@ turn_to_sheep = function()
 {
 	var _v = new Vector2();
 	var _nearest = instance_nearest_notself(obj_sheep);
-	if(_nearest)
+	if(_nearest.id)
 	{
 		if(_nearest.dist > sheep_cozy_distance)
 		{

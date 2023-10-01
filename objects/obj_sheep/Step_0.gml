@@ -1,5 +1,13 @@
 /// @description Wstaw opis w tym miejscu
 // W tym edytorze możesz zapisać swój kod
+if(move_in != 0)
+{
+	var _change = clamp(move_in,-move_speed,move_speed);
+	x += _change;
+	move_in -= _change;
+	if(abs(move_in) < sprite_width/4)
+		safe = false;
+}
 
 if(not safe)
 {
@@ -22,7 +30,7 @@ if(not safe)
 			if(food < max_food)
 			{
 				speed = 0;
-				food += 1+max_food/room_speed/10;
+				food += 1+max_food/room_speed/(10/move_speed);
 			}
 			else
 				eating = false;
@@ -103,19 +111,37 @@ if(not safe)
 	if(_ship and food > max_food*hunger_ratio)
 	{
 		var _sheep_list_length = array_length(_ship.sheep_list);
-		if(_sheep_list_length  < 10 )
+		if(_sheep_list_length  < 6 )
 		{
 			safe = true;
 			array_push(_ship.sheep_list,id);
-			_sheep_list_length += _sheep_list_length;
-			x = _ship.bbox_left+sprite_width/2+ _sheep_list_length mod 2 * 16;
-			y = _ship.bbox_top+sprite_height/2+ _sheep_list_length div 2 * 16;
+			//_sheep_list_length += 1;
+			image_xscale = 1;
+			x = _ship.bbox_left + sprite_width/2 + (_sheep_list_length mod 2) * 16;
+			y = _ship.bbox_top + sprite_height*1.25 + (_sheep_list_length div 2) * 16;
+			
 			speed = 0;
-			if(carry)
+			
+		}
+	}
+}
+
+if(carry)
 			{
 				carry.x = bbox_left;
 				carry.y = bbox_top;
 			}
-		}
-	}
+
+if(speed != 0)
+{
+	image_speed = speed;
+}
+if(eating)
+{
+	image_speed = move_speed;
+}
+else
+{
+	image_index = 0;
+	image_speed = 0;
 }

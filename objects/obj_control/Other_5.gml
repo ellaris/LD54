@@ -8,7 +8,12 @@ if(room == rm_game)
 	{
 		_points += 1;
 		if(carry)
+		{
 			_points += 1;
+			carry = noone;
+		}
+		persistent = true;
+		visible = false;
 	}
 	power_points += _points;
 }

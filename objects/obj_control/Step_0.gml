@@ -16,6 +16,20 @@ if(room == rm_game)
 		}
 		spawn_cd = max_spawn_cd;
 	}
+	
+	if(level > 5 and enemy_spawn_cd <= 0)
+	{
+		repeat level div 6
+		{
+			var _side = irandom(1);
+			var _enemy_type = choose(obj_slime);
+			var _enemy = instance_create_layer(_side*room_width*irandom(1)+(1-_side)*irandom(room_width),(1-_side)*room_height*irandom(1)+_side*irandom(room_height),layer,_enemy_type);
+
+		}
+		enemy_spawn_cd = enemy_spawn_cd_max/level;
+	}
+	if(enemy_spawn_cd > 0)
+		enemy_spawn_cd -= 1;
 
 	if(spawn_cd > 0)
 		spawn_cd -= spawn_cd_reduction;

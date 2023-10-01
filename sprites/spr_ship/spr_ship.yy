@@ -3,8 +3,8 @@
   "resourceVersion": "1.0",
   "name": "spr_ship",
   "bbox_bottom": 79,
-  "bbox_left": 0,
-  "bbox_right": 47,
+  "bbox_left": 6,
+  "bbox_right": 41,
   "bbox_top": 0,
   "bboxMode": 0,
   "collisionKind": 1,
@@ -15,8 +15,8 @@
   "frames": [
     {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"872c309b-b9ab-49bd-9d76-30d4cbb0d19c",},
   ],
-  "gridX": 0,
-  "gridY": 0,
+  "gridX": 8,
+  "gridY": 8,
   "height": 80,
   "HTile": false,
   "layers": [
