@@ -70,7 +70,7 @@ generate_map = function()
 	else
 	{
 		_spawn_sheep = min(level div 3,10);
-		_spawn_pasture = max(1,5 - level div 7);
+		_spawn_pasture = max(1,5 - (level div 5));
 		_spawn_item = max(_spawn_sheep/2, 1.1*level - power(1/6 *level,2));
 		_spawn_scarecrow = min(4, level div 4);
 	}
@@ -78,7 +78,10 @@ generate_map = function()
 	
 	
 	var _occupied = 0;
-	spawn_object(_spawn_sheep, obj_sheep, _occupied);
+	var _sheep_objects = [obj_sheep_normal]
+	if(level >= 7)
+		_sheep_objects = [obj_sheep_normal,obj_sheep_fast]
+	spawn_object(_spawn_sheep, _sheep_objects, _occupied);
 	spawn_object(_spawn_pasture, obj_pasture, _occupied, layer_get_id("back"));
 	spawn_object(_spawn_item, obj_item, _occupied);
 	spawn_object(_spawn_scarecrow, obj_scarecrow, _occupied, layer_get_id("back"));
@@ -110,7 +113,9 @@ spawn_object = function(_num, _obj, _occupied_array, _layer = layer)
 	var _row_length = 32;
 	var _x_gen = room_width*0.8;
 	var _rows = _x_gen/_row_length;
-	var _cols = room_height/_row_length-1;
+	var _cols = room_height/_row_length-1-2;
+	if(is_array(_obj))
+		_obj = _obj[irandom(array_length(_obj)-1)];
 	if(not is_array(_occupied_array))
 		_occupied_array = array_create(_rows*_cols+_rows+1);
 	
@@ -119,8 +124,8 @@ spawn_object = function(_num, _obj, _occupied_array, _layer = layer)
 		var _coord = irandom(_rows*_cols+_rows);
 		while(_occupied_array[_coord] != 0)
 			_coord = irandom(_rows*_cols+_rows);
-		var _instance = instance_create_layer(_row_length/2+(_coord mod _rows) * _row_length, 
-			_row_length/2+(_coord div _rows) * _row_length, _layer, _obj);
+		var _instance = instance_create_layer(_row_length+_row_length/2+(_coord mod _rows) * _row_length, 
+			_row_length+_row_length/2+(_coord div _rows) * _row_length, _layer, _obj);
 		_occupied_array[_coord] = _instance;
 	}
 }

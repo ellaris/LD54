@@ -19,12 +19,12 @@ hunger_ratio = 0.3;
 //max_sleep = room_speed*60;
 //sleep = irandom(max_sleep);
 
-map_sight_distance = 64;
-bird_sight_distance = 64;
-sheep_cozy_distance = 48;
+map_sight_distance = 32;
+bird_sight_distance = 80;
+sheep_cozy_distance = 64;
 pasture_sight_distance = 48;
-item_sight_distance = 48;
-ship_sight_distance = 48;
+item_sight_distance = 32;
+ship_sight_distance = 64;
 
 turn_from_map_edge = function()
 {

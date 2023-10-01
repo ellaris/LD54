@@ -22,6 +22,7 @@ if(_bird)
 	x += lengthdir_x(2,_dir);
 	y += lengthdir_y(2,_dir);
 	instance_destroy(_bird);
+	audio_play_sound(snd_spawn_enemy,2,false);
 }
 
 if(hp <= 0)

@@ -57,7 +57,7 @@ if(room == rm_game)
 	else
 	{
 		part_system_position(particle_sd_system,-100,0);
-		part_system_automatic_update(particle_sd_system,false);
+		part_system_automatic_update(particle_sd_system,true);
 	}
 
 	if(close_in_anim < close_in_distance and close_in_distance <= 0.9)

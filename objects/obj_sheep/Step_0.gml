@@ -7,7 +7,7 @@ if(move_in != 0)
 	var _change = clamp(move_in,-move_speed,move_speed);
 	x += _change;
 	move_in -= _change;
-	if(abs(move_in) < sprite_width/4)
+	if(move_in == 0)
 		safe = false;
 }
 
@@ -156,7 +156,7 @@ if(not safe)
 
 if(carry)
 {
-	carry.x = bbox_left;
+	carry.x = x-sprite_width/4;
 	carry.y = bbox_top;
 }
 

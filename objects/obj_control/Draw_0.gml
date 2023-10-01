@@ -9,9 +9,9 @@ if(room == rm_game)
 	{
 		var _loss = instance_number(obj_sheep) == 0;
 		draw_set_color(c_green);
-		var _str = "Sheep saved"
+		var _str = "Sheep saved\nClick to Continue"
 		if(_loss)
-			_str = "Sheep Lost"
+			_str = "Sheep Lost\nClick to Restart"
 		draw_text(room_width/2,room_height/2,_str)
 		if(mouse_check_button_pressed(mb_left))
 		{

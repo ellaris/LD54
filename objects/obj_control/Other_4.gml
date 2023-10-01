@@ -8,12 +8,17 @@ if(room == rm_game)
 		var _sheep = instance_find(obj_sheep, i);
 		_sheep.y = room_height/2;
 		_sheep.x = -16-24*i
+		_sheep.direction = 0;
+		_sheep.speed = 0;
 		_sheep.move_in = -_sheep.x;
 		_sheep.persistent = false;
 		_sheep.visible = true;
+		_sheep.food = _sheep.max_food*_sheep.hunger_ratio;
 	}
 	generate_map();
 	enemy_spawn_cd = enemy_spawn_cd_max;
+	
+	// tutorial slime
 	if(level == 5)
 	{
 		var _enemy = instance_create_layer(irandom(room_width),choose(0,room_height),layer,obj_slime);

@@ -30,7 +30,10 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": null,
+  "spriteId": {
+    "name": "spr_sheep",
+    "path": "sprites/spr_sheep/spr_sheep.yy",
+  },
   "spriteMaskId": null,
   "visible": true,
 }
