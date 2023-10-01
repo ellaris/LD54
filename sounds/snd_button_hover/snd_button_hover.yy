@@ -19,5 +19,5 @@
   "sampleRate": 44100,
   "soundFile": "snd_button_hover.wav",
   "type": 0,
-  "volume": 1.0,
+  "volume": 0.4,
 }

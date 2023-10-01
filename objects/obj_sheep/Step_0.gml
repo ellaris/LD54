@@ -15,8 +15,9 @@ if(not safe)
 {
 	if(x < abs(sprite_width/2))
 		x = abs(sprite_width/2)
-	if(x > room_width-sprite_width/2)
-		x = room_width-sprite_width/2
+	// make it easier to herd the sheep to the ship
+	if(x > room_width-sprite_width*2)
+		x = room_width-sprite_width*2
 	if(y < sprite_height/2)
 		y = sprite_height/2
 	if(y > room_height-sprite_height/2)
@@ -32,7 +33,7 @@ if(not safe)
 			if(food < max_food)
 			{
 				speed = 0;
-				food += 1+max_food/room_speed/(10/move_speed);
+				food += max_food/room_speed/(10/move_speed);
 				if(not audio_is_playing(snd_sheep_eat))
 					audio_play_sound(snd_sheep_eat,2,false);
 			}
@@ -68,7 +69,9 @@ if(not safe)
 		var _edge = turn_from_map_edge();
 		var _birds = turn_from_birds();
 		var _sheep = turn_to_sheep();
-		var _pasture = turn_to_pasture();
+		var _pasture = instance_nearest(x,y,obj_pasture)//turn_to_pasture();
+		var _item = instance_nearest(x,y,obj_item);
+		var _ship = obj_ship;
 
 		speed = 0;
 		if(_birds.x != 0 or _birds.y != 0)
@@ -81,11 +84,11 @@ if(not safe)
 			direction = _edge.get_direction(move_speed);
 			speed = move_speed;
 		}
-		else if(_pasture.x != 0 or _pasture.y != 0)
-		{
-			direction = _sheep.get_direction(move_speed);
-			speed = move_speed;
-		}
+		//else if(_pasture.x != 0 or _pasture.y != 0)
+		//{
+		//	direction = _sheep.get_direction(move_speed);
+		//	speed = move_speed;
+		//}
 		else if(_sheep.x != 0 or _sheep.y != 0)
 		{
 			direction = _sheep.get_direction(move_speed);
@@ -103,9 +106,28 @@ if(not safe)
 			speed = wander_speed;
 		}
 
-		if(food > 0)
+		if(food > 0 and obj_control.level > 1)
 			food -= 1;
+			
+		if(food > max_food*hunger_ratio and point_distance(x,y,_ship.x,_ship.y) < ship_sight_distance)
+		{
+			var _towards_ship = point_direction(x,y,_ship.x,_ship.y);
+			direction += angle_difference(_towards_ship,direction)/2;
+		}
+		else if(_pasture and food < max_food*hunger_ratio and point_distance(x,y,_pasture.x,_pasture.y) < pasture_sight_distance)
+		{
+			var _towards_pasture = point_direction(x,y,_pasture.x,_pasture.y);
+			direction += angle_difference(_towards_pasture,direction)/2;
+		}
+		else if(_item and not carry and not _item.carried and point_distance(x,y,_item.x,_item.y) < item_sight_distance)
+		{
+			var _towards_item = point_direction(x,y,_item.x,_item.y);
+			direction += angle_difference(_towards_item,direction)/2;
+		}
 	}
+	
+	
+		
 	
 	if(direction < 90 or direction > 270)
 		image_xscale = 1;

@@ -57,6 +57,7 @@
     {"id":{"name":"spr_item","path":"sprites/spr_item/spr_item.yy",},},
     {"id":{"name":"obj_bird_wild","path":"objects/obj_bird_wild/obj_bird_wild.yy",},},
     {"id":{"name":"spr_pasture","path":"sprites/spr_pasture/spr_pasture.yy",},},
+    {"id":{"name":"snd_background_music","path":"sounds/snd_background_music/snd_background_music.yy",},},
     {"id":{"name":"obj_button","path":"objects/obj_button/obj_button.yy",},},
     {"id":{"name":"part_spawn","path":"particles/part_spawn/part_spawn.yy",},},
     {"id":{"name":"snd_spawn_enemy","path":"sounds/snd_spawn_enemy/snd_spawn_enemy.yy",},},

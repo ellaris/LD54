@@ -45,13 +45,19 @@ if(room == rm_game)
 		switch(level)
 		{
 			case 1:
-				_str = "Escort the Sheep to the ship >";
+				_str = "Escort the Sheep to the ship >\nBirds fly towards cursor and herd sheep";
 			break;
 			case 2:
-				_str = "Feed the hungry sheep";
+				_str = "Feed the hungry sheep\nIf the sheep is hungry it won't board the ship";
 				break;
 			case 3:
-				_str = "Collect valuable vases";
+				_str = "Collect valuable vases\nThe sheep can carry a vase";
+				break;
+			case 4:
+				_str = "After Some time the white plague will limit your space\nThe Ship also has limited space and can carry 6 sheep";
+				break;
+			case 5:
+				_str = "Slimes are after your sheep, repel them with your birds";
 				break;
 			default:
 				_str = "";
@@ -65,4 +71,10 @@ if(room == rm_game)
 if(room == rm_start)
 {
 	draw_text(96,16,"Points: "+string(power_points)+"  Map: "+string(level));
+	var _str = ""
+	if(level == 4)
+		_str = "Spend your points to upgrade birds:\n cooldown, damage, quantity, speed, turn, duration";
+	
+	draw_set_color(c_green);
+	draw_text(room_width/2,room_height/2,_str);
 }

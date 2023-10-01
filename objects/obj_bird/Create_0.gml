@@ -2,7 +2,7 @@
 // W tym edytorze możesz zapisać swój kod
 
 max_speed = 2;
-max_turn = 2;
+max_turn = 3;
 damage = 1;
 life = 0
 max_life = room_speed*10;

@@ -8,7 +8,10 @@ if(_sheep)
 	direction = point_direction(x,y,_sheep.x,_sheep.y);
 	speed = move_speed;
 	if(instance_place(x,y,_sheep) and not _sheep.safe)
+	{
 		instance_destroy(_sheep);
+		instance_destroy();
+	}
 }
 
 var _bird = instance_place(x,y,obj_bird);

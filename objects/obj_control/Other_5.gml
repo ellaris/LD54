@@ -16,4 +16,5 @@ if(room == rm_game)
 		visible = false;
 	}
 	power_points += _points;
+	part_system_automatic_update(particle_sd_system,false);
 }

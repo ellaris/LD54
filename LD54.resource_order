@@ -36,6 +36,7 @@
     {"name":"spr_item","order":6,"path":"sprites/spr_item/spr_item.yy",},
     {"name":"obj_bird_wild","order":2,"path":"objects/obj_bird_wild/obj_bird_wild.yy",},
     {"name":"spr_pasture","order":2,"path":"sprites/spr_pasture/spr_pasture.yy",},
+    {"name":"snd_background_music","order":9,"path":"sounds/snd_background_music/snd_background_music.yy",},
     {"name":"obj_button","order":15,"path":"objects/obj_button/obj_button.yy",},
     {"name":"part_spawn","order":1,"path":"particles/part_spawn/part_spawn.yy",},
     {"name":"snd_spawn_enemy","order":6,"path":"sounds/snd_spawn_enemy/snd_spawn_enemy.yy",},

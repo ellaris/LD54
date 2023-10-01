@@ -17,13 +17,16 @@ if(room == rm_game)
 		spawn_cd = max_spawn_cd;
 	}
 	
-	if(level > 5 and enemy_spawn_cd <= 0)
+	if(level >= 5 and enemy_spawn_cd <= 0)
 	{
-		repeat level div 6
+		repeat (level div 5)
 		{
+			if(instance_number(obj_slime) >= instance_number(obj_sheep))
+				break;
 			var _side = irandom(1);
 			var _enemy_type = choose(obj_slime);
-			var _enemy = instance_create_layer(_side*room_width*irandom(1)+(1-_side)*irandom(room_width),(1-_side)*room_height*irandom(1)+_side*irandom(room_height),layer,_enemy_type);
+			// only spawn on the left not the right
+			var _enemy = instance_create_layer(_side*room_width*irandom(0)+(1-_side)*irandom(room_width),(1-_side)*room_height*irandom(1)+_side*irandom(room_height),layer,_enemy_type);
 
 		}
 		enemy_spawn_cd = enemy_spawn_cd_max/level;
@@ -39,20 +42,23 @@ if(room == rm_game)
 	
 	if(close_in_timer > 0)
 		close_in_timer -= 1;
-	else
+	else if( close_in_distance < 0.9)
 	{
 		close_in_timer = close_in_period;
 		close_in_distance += 0.1;
 		audio_play_sound(snd_close_in_move,2,false);
 	}
 	
-	if(close_in_timer <= room_speed*1.5)
+	if(close_in_timer <= room_speed*1.5 and close_in_distance <= 0.9)
 	{
 		part_system_automatic_update(particle_sd_system,true);
 		part_system_position(particle_sd_system,room_width*close_in_anim,0);
 	}
 	else
+	{
+		part_system_position(particle_sd_system,-100,0);
 		part_system_automatic_update(particle_sd_system,false);
+	}
 
 	if(close_in_anim < close_in_distance and close_in_distance <= 0.9)
 	{
@@ -61,8 +67,13 @@ if(room == rm_game)
 	
 	
 	level_complete = true;
+	if(array_length(obj_ship.sheep_list) < 6)
 	with(obj_sheep)
 		if(not safe)
+		{
 			other.level_complete = false;
+			if(other.close_in_anim == 0.9)
+				instance_destroy();
+		}
 
 }
